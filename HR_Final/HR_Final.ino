@@ -79,16 +79,12 @@ void setup() {
     delay(500);
 }
 
-
-
 void loop() {
   int myBPM = pulseSensor.getBeatsPerMinute(); // Calls function of the pulse senor object. This works out the HR - BPM is now held as myBPM. 
  
-
-  
   if (pulseSensor.sawStartOfBeat()) { // if start of beat found 
-      tone(Buzzer,700, 10); // pin variable, tone and lenght of tone
-
+      tone(Buzzer,700, 10); // pin variable, tone , length of tone
+ 
    // print heart segments
     lcd.setCursor(0,0);
     lcd.write(byte(1));
@@ -108,22 +104,32 @@ void loop() {
     lcd.write(byte(8));
 
 
-   //print Heart Rate as BPM
+  //print Heart Rate as BPM 
+  //Set paramaters 
+  if(myBPM >100){
+    digitalWrite(LED_red, HIGH);// turn on red light if >100BPM
     lcd.setCursor(5,0);
     lcd.print("Heart Rate");
     lcd.setCursor(5,1);
     lcd.print(myBPM);
-    lcd.print("  BPM   ");
-
-      
-
-  //Set paramaters 
-  if(myBPM >100 || myBPM < 50){
-    digitalWrite(LED_red, HIGH);// turn on red light if outside of the set paramaters
+    lcd.print("  BPM HI  "); //Indicate in display HI along with BPM
+  }
+    else if( myBPM < 50){
+    digitalWrite(LED_red, HIGH);// turn on red light if <50BPM
+    lcd.setCursor(5,0);
+    lcd.print("Heart Rate");
+    lcd.setCursor(5,1);
+    lcd.print(myBPM);
+    lcd.print("  BPM Lo  ");//Indicate Lo in display along with BPM
   }
    else{
     digitalWrite(LED_red, LOW);// turn off when within paramaters
-   }
+    lcd.setCursor(5,0);
+    lcd.print("Heart Rate");
+    lcd.setCursor(5,1);
+    lcd.print(myBPM);
+    lcd.print("  BPM    ");//Display BPM 
+    }
     
   }
 
