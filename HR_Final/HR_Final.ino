@@ -14,7 +14,7 @@ LiquidCrystal lcd(10, 9, 3, 4, 7, 8); // lcd(RS,E,D4,D5,D6,D7).
 
 const int PulseSensorWire = A3; // PulseSensor connected to A3
 const int LED_green = 5; //green LED connected to pin 5
-const int LED_red = 6; //red LED connected to pin 5
+const int LED_red = 6; //red LED connected to pin 6
 const int Buzzer = 2; // Buzzer connected to pin 2
 int Threshold = 550; //Determine which Signal to count as a beat - default value for green LED 550- may need adjusting for sensitivity
 
